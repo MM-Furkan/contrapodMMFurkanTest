@@ -1,0 +1,27 @@
+<apex:page controller="DemoController" standardStylesheets="false" showHeader="false" sidebar="false">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <title>MM | Portal</title>
+    </head>
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></apex:stylesheet>
+    <apex:includeLightning />
+    <!-- <h1>HI HI HI</h1> -->
+    <div id="LightningComponentid" />
+    <script>
+        // console.log('{!listDemo}');
+        $Lightning.use("c:mmporfolioApp", function () {
+            $Lightning.createComponent("c:mmportfolio",
+                {
+                },
+                "LightningComponentid",
+                function (cmp) {
+                    console.log('LWC Componenet added in VF page');
+                });
+        });
+    </script>
+</apex:page>

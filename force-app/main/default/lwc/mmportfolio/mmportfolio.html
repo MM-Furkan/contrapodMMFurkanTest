@@ -1,0 +1,192 @@
+<template>
+    <div if:true={showSpinner} class="exampleHolder">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item class="custome_layout-item" size="12" small-device-size="12" medium-device-size="4"
+            large-device-size="4" padding="around-small">
+            <span class="slds-avatar slds-avatar_circle slds-avatar_large" style="width: 10rem;height:10rem">
+                <img src={staticResourceURL} alt="MMFurkan">
+            </span>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-align-middle" size="12" small-device-size="12" medium-device-size="4"
+            large-device-size="4" padding="around-small">
+            <div class="slds-text-heading_large slds-p-around_xx-small">MM Furkan</div>
+            <div class="slds-text-heading_medium slds-p-around_xx-small">Salesforce Developer</div>
+            <a href="https://www.linkedin.com/in/mm-furkan-2a02a4143/" target="_blank"><i style="font-size: 25px;"
+                    class="fa fa-linkedin slds-p-right_xx-large slds-p-left_xx-small slds-p-top_medium"
+                    aria-hidden="true"></i>
+            </a>
+            <a href="https://twitter.com/MM_Furkan" target="_blank"><i style="font-size: 25px;"
+                    class="fa fa-twitter slds-p-right_xx-large slds-p-left_xx-small slds-p-top_medium"
+                    aria-hidden="true"></i>
+            </a>
+            <a href="https://www.instagram.com/mm.furkan/" target="_blank"><i style="font-size: 25px;"
+                    class="fa fa-instagram slds-p-right_xx-large slds-p-left_xx-small slds-p-top_medium"
+                    aria-hidden="true"></i>
+            </a>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-align-middle slds-p-vertical_small" size="12" small-device-size="12"
+            medium-device-size="4" large-device-size="4">
+            <div class="slds-text-heading_small slds-p-around_xx-small"> <i class="fa fa-map-marker"></i>&nbsp;
+                Mumbai,
+                Maharashtra, India</div>
+            <div class="slds-text-heading_small slds-p-around_xx-small">
+                <lightning-formatted-email value="mominfurquan@gmail.com"></lightning-formatted-email>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item class="custome_work_layout_item" size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="9" padding="around-small">
+            <div class="slds-box slds-p-around_none slds-m-top_medium slds-m-horizontal_x-small"
+                style="background-color: #fff">
+                <p class="slds-text-heading_large slds-p-around_small">Work Demo</p>
+                <lightning-card for:each={demoList} for:item="d" key={d.Id} title={d.Name}
+                    style="width: 96%;margin-left:2%;text-align:center;display:block;margin-top: 10px">
+                    <iframe key={d.Id} width="80%" class="custome_ifram-box" height="400" src={d.Demo_URL__c}
+                        allowfullscreen></iframe>
+                    <!-- <iframe src="https://drive.google.com/file/d/10hM_pyRnLrWNKQhgxqaEyOFMhiQMZRcP/preview" ></iframe> -->
+                    <div class="slds-p-around_none slds-m-top_medium" key={d.Id}>
+                        <p key={d.Id} class="slds-p-horizontal_small">{d.Description__c}</p>
+
+                        <div class="slds-size_4-of-5 slds-align_absolute-center">
+                            <p class="slds-truncate" key={d.Id}>
+                                <a key={d.Id} href={d.External_link__c} class="slds-text-link_reset"
+                                    target="_blank">Click
+                                    to watch the Demo directly.
+                                    <span class="slds-text-link">{d.External_link__c}</span></a>
+                            </p>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="3"
+            padding="around-small">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-p-vertical_small">
+                    <lightning-card title="About Me" class="slds-align_absolute-center"
+                        style="width: 100%;text-align:left;display:block">
+                        <p class="slds-p-horizontal_small">Salesforce Developer with a demonstrated history of
+                            working
+                            in
+                            the information technology and services industry.</p>
+                        <p class="slds-p-horizontal_small">Skilled in LWC, Apex, Aura, Node.js,
+                            AngularJS, ExpressJS, ElectronJS, MongoDB, REST, API, Bootstrap, HTML, CSS, SOQL, jQuery
+                            and
+                            JavaScript.
+                        </p>
+                        <p class="slds-p-horizontal_small">
+                            Strong engineering professional with a Bachelor of Technology (B.Tech.) focused on
+                            Computer
+                            Science from
+                            A.I.A.K.T.CAMPUS of Mumbai University. </p>
+                    </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-p-vertical_small">
+                    <lightning-card title="Skills" class="" style="width: 100%;display:block">
+                        <p class="slds-p-around_medium" for:each={skillList} for:item="s" key={s.Id}>
+                            <lightning-icon icon-name={s.Icon_Name__c} variant="brand">
+                            </lightning-icon>&nbsp; {s.Name} <span
+                                style="float:right;margin-top: 25px;">{s.Level__c}</span>
+                            <lightning-progress-bar class="slds-m-top_small" style="display: block" value={s.Percent__c}
+                                size="large"></lightning-progress-bar>
+                        </p>
+                    </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-p-vertical_small">
+                    <lightning-card title="Certification" class="" style="width: 100%;display:block">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-12 slds-m-top_medium"
+                                style="width: 50px;text-align:center">
+                                <lightning-icon icon-name="standard:resource_skill" variant="brand">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12 slds-m-top_medium">
+                                <p> Platform Developer 1 </p>
+                                <p style="font-size: 11px;"> Aug 2020 (SF Exam)</p>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-12 slds-m-top_medium"
+                                style="width: 50px;text-align:center">
+                                <lightning-icon icon-name="standard:resource_skill" variant="brand">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12 slds-m-top_medium">
+                                <p> Node Js </p>
+                                <p style="font-size: 11px;"> Nov 2018 (Udemy) </p>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-12 slds-m-top_medium slds-m-bottom_medium"
+                                style="width: 50px;text-align:center">
+                                <lightning-icon icon-name="standard:resource_skill" variant="brand">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12 slds-m-top_medium slds-m-bottom_medium ">
+                                <p> Angular Js </p>
+                                <p style="font-size: 11px;"> Jan 2019 (Udemy) </p>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-p-vertical_small">
+                    <lightning-card title="Experience (2Y | 3M)" class="" style="width: 100%;display:block">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-12 slds-m-top_medium"
+                                style="width: 50px;text-align:center">
+                                <lightning-icon icon-name="standard:employee_job" variant="brand">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12 slds-m-top_medium">
+                                <p> Salesforce Developer , Finesse IT Lab. </p>
+                                <p style="font-size: 11px;"> Aug 2019 - Present </p>
+                                <ol class="slds-list_dotted slds-m-top_small">
+                                    <li>Performs administrative responsibilities to include custom fields,
+                                        workflows,
+                                        validation rules, user management, etc</li>
+                                    <li>Develop, maintain, create, and improve validation rules, custom workflows,
+                                        Visualforce pages, Apex customizations, custom objects, fields, and formulas
+                                    </li>
+                                    <li>Developing Lightning Component (Aura),Lightning Web Component (LWC),Custom
+                                        Tabs.
+                                        Community Development. and Salesforce site.com.</li>
+                                    <li>Integrating with other system REST API call SOAP API call and updating
+                                        salesforce records.</li>
+                                    <li>Writing SOQL Queries to retrieve and updating/creating/deleting the records.
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-12 slds-m-top_medium slds-m-bottom_medium"
+                                style="width: 50px;text-align:center">
+                                <lightning-icon icon-name="standard:employee_job" variant="brand">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-col slds-size_10-of-12 slds-m-top_medium slds-m-bottom_medium ">
+                                <p> Full Stack Developer Comflex Technology </p>
+                                <p style="font-size: 11px;"> Jun 2018 - jul 2019 </p>
+                                <ol class="slds-list_dotted slds-m-top_small">
+                                    <li>Software Developer, Developed and maintained web sites and web services and
+                                        Desktop app to facilitate the client.</li>
+                                    <li>Designing APIs to move data across the internet. Creating an awesome UI for
+                                        user
+                                        satisfaction. Maintaining the server and generating the log of user activity
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

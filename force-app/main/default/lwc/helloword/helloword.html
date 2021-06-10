@@ -1,0 +1,85 @@
+<template>
+    <div if:true={showSpinner} class="exampleHolder">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <lightning-card title="Under Standing @track" icon-name="custom:custom19">
+        <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">@track firVar </div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">{firVar}</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">secodVar</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">{secodVar}</div>
+                    </th>
+                </tr>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">Two Depth Value</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">
+                            {jsonObject.firstName.oneDepth.twoDepth.value}</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">One Depth Value</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">{jsonObject.firstName.oneDepth.value}
+                        </div>
+                    </th>
+                </tr>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">@track Two Depth Value</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">
+                            {jsonObjectwithTrack.firstName.oneDepth.twoDepth.value}</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">@track One Depth Value</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">
+                            {jsonObjectwithTrack.firstName.oneDepth.value}</div>
+                    </th>
+                </tr>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">
+                            <lightning-input type="text" value={firVar} name="input1" label="Fir Var with @track"
+                                onchange={handleChange}></lightning-input>
+                        </div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">
+                            <lightning-input type="text" value={secodVar} name=input2 label="Secod Var without @track"
+                                onchange={otherChnage}></lightning-input>
+                        </div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Name">
+                            <lightning-input type="text" value={jsonObject.firstName.value} name="input1"
+                                label="Change in JSON with Track" onchange={onlyOneChange}></lightning-input>
+                        </div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Some Custom Column">
+                            <lightning-input type="text" value={jsonObject.lastName.value} name=input2
+                                label="Change in JSON Without Track" onchange={onlyOneChangeTrackJSON}>
+                            </lightning-input>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </lightning-card>
+
+</template>

@@ -1,0 +1,137 @@
+<template>
+    <div if:true={showSpinner} class="exampleHolder">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <lightning-card title="Add Task Here" icon-name="standard:task">
+        <lightning-layout multiple-rows if:true={projectData}>
+            <lightning-layout-item size="12" small-device-size="1" medium-device-size="3" large-device-size="3"
+                padding="around-small">
+                <div class="slds-box">
+                    <span>Project Name : </span>&nbsp;<span>{projectData.fields.Name.value}</span>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="1" medium-device-size="3" large-device-size="5"
+                padding="around-small">
+                <div class="slds-box">
+                    <span>Project Description :</span>&nbsp;<span>{projectData.fields.Description__c.value}</span>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="1" medium-device-size="3" large-device-size="4"
+                padding="around-small">
+                <div class="slds-box">
+                    <span>Add task: <lightning-button-icon onclick={addTask} class="slds-m-left_xx-small"
+                            icon-name="utility:add" variant="border-filled" label="Add Task" alternative-text="add task"
+                            title="add task to table">
+                        </lightning-button-icon> </span>&nbsp;&nbsp;&nbsp;
+                    <span>Remove task: <lightning-button-icon onclick={removeTask} class="slds-m-left_xx-small"
+                            icon-name="utility:close" variant="border-filled" label="Remove Task"
+                            alternative-text="remove task" title="remove task from table">
+                        </lightning-button-icon> </span>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    <br />
+    <lightning-card>
+        <template if:true={showTable}>
+            <lightning-layout>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="12">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_large">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col" style="background-color: rgb(27,82, 151); color: #fff;">
+                                    <div class="slds-truncate" title="Serial Number">Sr.No</div>
+                                </th>
+                                <th class="" scope="col" style="background-color: rgb(27,82,151); color: #fff;">
+                                    <div class="slds-truncate" title="Task Name">Task Name</div>
+                                </th>
+                                <th class="" scope="col" style="background-color: rgb(27,82,151); color: #fff;">
+                                    <div class="slds-truncate" title="Description">Description</div>
+                                </th>
+                                <th class="" scope="col" style="background-color: rgb(27,82,151); color: #fff;">
+                                    <div class="slds-truncate" title="Start Date">Start Date</div>
+                                </th>
+                                <th class="" scope="col" style="background-color: rgb(27,82,151); color: #fff;">
+                                    <div class="slds-truncate" title="End Date">End Date</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={taskList} for:item="tL" for:index="Index">
+                                <tr key={tL.Number}>
+                                    <td>
+                                        <div class="slds-truncate" title="Sr.No">{tL.Number}</div>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="text" variant="label-hidden" key={tL.Name}
+                                            data-key="Name" data-index={Index} name="tasName"
+                                            placeholder="Enter Task Name" onchange={handleInputChage} required>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="text" variant="label-hidden" key={tL.Description__c}
+                                            data-key="Description__c" data-index={Index} name="tasDescription"
+                                            placeholder="Enter Task Description" onchange={handleInputChage} required>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="Date" variant="label-hidden" key={tL.Start_Date__c}
+                                            data-key="Start_Date__c" data-index={Index} name="startDate"
+                                            placeholder="Pick a Date" onchange={handleInputChage} required>
+                                        </lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="Date" variant="label-hidden" key={tL.End_Date__c}
+                                            data-key="End_Date__c" data-index={Index} name="endDate"
+                                            placeholder="Pick a Date" onchange={handleInputChage} required>
+                                        </lightning-input>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout class="slds-m-top_medium">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+                    class="slds-align_absolute-center">
+                    <lightning-button variant="brand" label="Save" class="slds-m-horizontal_small" title="Save"
+                        data-variant="save" onclick={submit}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+                    class="slds-align_absolute-center">
+                    <lightning-button variant="brand" label="Quick Save" class="slds-m-horizontal_small"
+                        title="Quick Save" data-variant="quickSave" onclick={submit}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+                    class="slds-align_absolute-center">
+                    <lightning-button variant="brand" label="Cancel" class="slds-m-horizontal_small" title="Cancel"
+                        data-variant="cancel" onclick={navigateToRecordPage}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={showTable}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-align_absolute-center">
+                    <div
+                        class="slds-grid slds-gutters slds-wrap slds-p-horizontal_small slds-m-top_xx-large slds-m-bottom_x-large">
+                        <div class="slds-col slds-size_12-of-12">
+                            <div class="slds-illustration slds-illustration_large" aria-hidden="true">
+                                <img src="/img/chatter/OpenRoad.svg" class="slds-illustration__svg" alt="" />
+                                <div class="slds-text-color_weak">
+                                    <h3 class="slds-text-heading_medium">List View</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-align_absolute-center">
+                    <lightning-button variant="brand" label="Cancel" class="slds-m-horizontal_small" title="Cancel"
+                        data-variant="cancel" onclick={navigateToRecordPage}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </lightning-card>
+</template>

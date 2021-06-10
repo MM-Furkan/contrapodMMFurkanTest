@@ -1,0 +1,7 @@
+<aura:component implements="lightning:isUrlAddressable,force:hasRecordId">
+    <aura:attribute name="refRecordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="pageReference" type="Object"/>
+    <c:createTaskManager rId="{!v.refRecordId}" srId="{!v.sObjectName}" />
+</aura:component>
